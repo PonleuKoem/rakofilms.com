@@ -1,5 +1,15 @@
 @extends('layouts.master')
 @section('title', 'Movies Today')
+<style type="text/css">
+        .movie-title{
+            color: #ff8d1b;
+            font-family: serif;
+        }
+        .year{
+            color: #000000;
+            font-family: serif;
+        }
+    </style>
 @section('content')
 		<div class="w3l-agile-horror">
 <!-- /w3l-medile-movies-grids -->
@@ -9,12 +19,11 @@
 					     <!--/browse-agile-w3ls -->
 						<div class="browse-agile-w3ls general-w3ls">
 								<div class="tittle-head">
-									<h4 class="latest-text">{{$message}} <small>({{$movies->total()}} videos)</small></h4>
 									<div class="container">
 										<div class="agileits-single-top">
 											<ol class="breadcrumb">
 											  <li><a href="{{URL::to('/')}}">Home</a></li>
-											  <li class="active">{{$message}}</li>
+											  <li class="active">{{$message}} <small>({{$movies->total()}} videos)</small></li>
 											</ol>
 										</div>
 									</div>
@@ -24,37 +33,28 @@
 							    <div class="browse-inner-come-agile-w3">
 							    @if($movies ->count()>0)
 							    @foreach($movies as $row)
-							   <div class="col-md-2 w3l-movie-gride-agile">
-										 <a href="{{URL::to('/post/'.$row->id)}}" class="hvr-shutter-out-horizontal"><img src="{{asset('images/'.$row->img)}}" title="album-name" alt=" " />
-									     <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-									</a>
-									  <div class="mid-1">
-										<div class="w3l-movie-text">
-											<h6><a href="{{URL::to('/post/'.$row->id)}}">{{$row->title}}</a></h6>							
-										</div>
-										<div class="mid-2">
-										
-											<p>2016</p>
-											<div class="block-stars">
-												<ul class="w3l-ratings">
-													     <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-														 <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-														 <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-														
-														  <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-														    <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-														  
-										
-												</ul>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-											
-									</div>
-							 	    <div class="ribben">
-										<p>NEW</p>
-									</div>	
-									</div>
+								   <div class="col-md-2 w3l-movie-gride-agile">
+		                                <a href="{{URL::to('/post/'.$row->id.'/movie.html')}}" class="hvr-shutter-out-horizontal"><img src="{{asset('uploads/movies/'.$row->imagePath)}}" title="album-name" class="img-responsive" alt="{{$row->title}}" />
+		                                    <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+		                                </a>
+		                                <div class="mid-1 agileits_w3layouts_mid_1_home">
+		                                    <div class="w3l-movie-text">
+		                                        <a href="{{URL::to('/post/'.$row->id.'/movie.html')}}"><h4 class="movie-title">{{str_limit($row->movie_title, 25)}}</h4></a>                         
+		                                    </div>
+		                                    <div class="mid-2 agile_mid_2_home">
+		                                        <p><small  class="year">{{$row->year}}</small></p>
+		                                        <div class="block-stars">
+		                                            <ul class="w3l-ratings">
+		                                                <p><small  class="created-at">{{date('d-m-Y', strtotime($row->created_at))}}</small></p>
+		                                            </ul>
+		                                        </div>
+		                                        <div class="clearfix"></div>
+		                                    </div>
+		                                </div>
+		                                <div class="ribben">
+		                                    <p><small>{{$row->resolution->resolution}}</small></p>
+		                                </div>
+		                            </div>
 									@endforeach
 									@else
 									<div class="">
@@ -76,50 +76,10 @@
 						</div>
 					</div>
 				<!-- //movie-browse-agile -->
-				<!--body wrapper start-->
-						<div class="review-slider">
-						 <h4 class="latest-text">Movie Reviews</h4>
-						 <div class="container">
-						 	<div class="w3_agile_banner_bottom_grid">
-								<div id="owl-demo" class="owl-carousel owl-theme">
-									@foreach($random as $row)
-									<div class="item">
-										<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-											<a href="{{URL::to('/post/'.$row->id)}}" class="hvr-shutter-out-horizontal"><img src="{{asset('images/'.$row->img)}}" title="album-name" class="img-responsive" alt=" " />
-												<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-											</a>
-											<div class="mid-1 agileits_w3layouts_mid_1_home">
-												<div class="w3l-movie-text">
-													<h6><a href="{{URL::to('/post/'.$row->id)}}">{{$row->title}}</a></h6>							
-												</div>
-												<div class="mid-2 agile_mid_2_home">
-													<p>2016</p>
-													<div class="block-stars">
-														<ul class="w3l-ratings">
-															<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-															<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-															<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-															<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-															<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-														</ul>
-													</div>
-													<div class="clearfix"></div>
-												</div>
-											</div>
-											<div class="ribben">
-												<p>NEW</p>
-											</div>
-										</div>
-									</div>
-									@endforeach
-								</div>
-							</div>
-						<!--body wrapper end-->
-			   </div>	
-		   </div>
+
+				</div>	
+			</div>
 		</div>
 	      <!-- //w3l-medile-movies-grids -->
 		</div>
-	</div>	
-</div>
 	@endsection

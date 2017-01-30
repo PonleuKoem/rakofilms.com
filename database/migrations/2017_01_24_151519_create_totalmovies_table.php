@@ -25,6 +25,12 @@ class CreateTotalmoviesTable extends Migration
             $table->timestamps();
             $table->engine = 'InnoDB';
         });
+        Schema::create('tbl_categories', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('category', '255');
+            $table->timestamps();
+            $table->engine = 'InnoDB';
+        });
         
         Schema::create('tbl_movies', function (Blueprint $table) {
             $table->increments('id');
@@ -35,6 +41,7 @@ class CreateTotalmoviesTable extends Migration
             $table->string('country', '255');
             $table->string('language', '255');
             $table->string('year', '4');
+            $table->integer('category_id')->unsigned();
             $table->integer('resolution_id')->unsigned();
             $table->integer('status_id')->unsigned();
             $table->timestamps();
@@ -43,6 +50,7 @@ class CreateTotalmoviesTable extends Migration
         Schema::table('tbl_movies', function ($table) {
             $table->foreign('resolution_id')->references('id')->on('tbl_resolutions');
             $table->foreign('status_id')->references('id')->on('tbl_statuses');
+            $table->foreign('category_id')->references('id')->on('tbl_categories');
         });
         Schema::create('tbl_genres', function (Blueprint $table) {
             $table->increments('id');
@@ -85,5 +93,6 @@ class CreateTotalmoviesTable extends Migration
         Schema::drop('tbl_movies_genres');
         Schema::drop('tbl_genres');
         Schema::drop('tbl_slides');
+        Schema::drop('tbl_categories');
     }
 }

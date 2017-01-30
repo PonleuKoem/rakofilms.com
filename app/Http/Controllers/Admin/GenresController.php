@@ -13,7 +13,7 @@ use Image;
 use View;
 use Session;
 use Input;
-use App\Genres;
+use App\Genre;
 use Carbon\Carbon;
 
 class GenresController extends Controller
@@ -26,11 +26,11 @@ class GenresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct(){
-        $genres = Genres::all();
+        $genres = Genre::all();
     }
     public function index()
     {
-        $genres = Genres::all();
+        $genres = Genre::all();
         return View::make('admin.pages.genre')
             ->with('genres', $genres);
     }
@@ -53,7 +53,7 @@ class GenresController extends Controller
      */
     public function store(GenresRequest $request)
     {
-        $genres = new Genres;
+        $genres = new Genre;
         $genres -> genre = $request->genre;
         $genres -> created_at = Carbon::now();
         $genres -> updated_at = Carbon::now();
@@ -106,7 +106,7 @@ class GenresController extends Controller
                 ->withInput(Input::except('password'));
         } else {
             // store
-            $genres = Genres::find($id);
+            $genres = Genre::find($id);
             $genres->genre       = Input::get('genre');
             $genres->updated_at = Carbon::now();
             $genres->save();
@@ -126,7 +126,7 @@ class GenresController extends Controller
     public function destroy($id)
     {
          // delete
-        $slides = Genres::find($id);
+        $slides = Genre::find($id);
         $slides->delete();
 
         // redirect

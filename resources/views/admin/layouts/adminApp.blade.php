@@ -8,29 +8,39 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="{{asset('AdminLTE/bootstrap/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{URL::to('AdminLTE/dist/css/AdminLTE.min.css')}}">
-  
-  <link rel="stylesheet" href="{{URL::to('AdminLTE/dist/css/skins/_all-skins.min.css')}}">  
-  <link rel="stylesheet" href="{{URL::to('css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{URL::to('AdminLTE/dist/css/bootstrap.css')}}">
+  <style type="text/css">
+    body{
+      font-family: 'Source Sans Pro','Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    .navbar{
+      background-color: #031d12;
+    }
+    .main-sidebar{
+      background-color: #000000;
+    }
+  </style>
+  @yield('stylesheets')
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="{{URL::to('/cms')}}" class="logo">
+    <a href="{{URL::to('/cms')}}" class="logo hidden-xs" style="position: fixed; background-color: rgba(3, 29, 18, 0.86)">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Admin</b>Movies</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
+    <nav class="navbar navbar-fixed-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" style="position: fixed;">
         <span class="sr-only">Toggle navigation</span>
       </a>
 
@@ -67,13 +77,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{asset('AdminLTE/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+              <!-- <img src="{{asset('AdminLTE/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"> -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{asset('AdminLTE/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                <!-- <img src="{{asset('AdminLTE/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image"> -->
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -119,30 +129,9 @@
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  <aside class="main-sidebar" style="position: fixed;">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="{{asset('AdminLTE/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
@@ -171,38 +160,38 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{URL::to('/movieslist')}}"><i class="fa fa-circle-o"></i>Movie List</a></li>
-            <li><a href="{{URL::to('/cms/news')}}"><i class="fa fa-circle-o"></i>News</a></li>
-            <li><a href="{{URL::to('/cms/trailers')}}"><i class="fa fa-circle-o"></i>Trailers</a></li>
-            <li><a href="{{URL::to('/genres')}}"><i class="fa fa-circle-o"></i>Genres</a></li>
-            <li><a href="{{URL::to('/cms/resolutions')}}"><i class="fa fa-circle-o"></i>Resolutions</a></li>
-            <li><a href="{{URL::to('/cms/statuses')}}"><i class="fa fa-circle-o"></i>Statuses</a></li>
+            <li><a href="{{URL::to('cms/movies')}}"><i class="fa fa-file-movie-o text-yellow"></i>Movies</a></li>
+            <li><a href="{{URL::to('/cms/news')}}"><i class="fa fa-file-code-o"></i>News</a></li>
+            <li><a href="{{URL::to('/genres')}}"><i class="fa fa-file-code-o"></i>Genres</a></li>
+            <li><a href="{{URL::to('/cms/resolutions')}}"><i class="fa fa-file-code-o"></i>Resolutions</a></li>
+            <li><a href="{{URL::to('/cms/statuses')}}"><i class="fa fa-file-code-o"></i>Statuses</a></li>
           </ul>
         </li>
-        <li><a href="{{URL::to('/slides')}}"><i class="fa fa-book"></i> <span>Slides</span></a></li>
+        <li><a href="{{URL::to('/cms/slides')}}"><i class="fa fa-book"></i> <span>Slides</span></a></li>
         <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        <li><a href="#"><i class="fa fa-user-md text-aqua"></i> <span>Subscribers </span> </span><span class="pull-right-container"><small class="label pull-right bg-aqua">3</small></span></a></li>
+        <li><a href="#"><i class="fa fa-trash text-red"></i> <span>Trash </span><span class="pull-right-container"><small class="label pull-right bg-red">3</small></span></a></li>
+        <li><a href="#"><i class="fa fa-envelope-o text-warning"></i> <span>Repport Error </span> </span><span class="pull-right-container"><small class="label pull-right bg-orange">3</small></span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
+  <div class="clearfix"></div>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
 
-    <section class="content-header">
-      <h1>
-        Dashboard
-        <small>Control panel</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
-    </section>
+  <!--   <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section> -->
 
     <!-- Main content -->
     <section class="content">
@@ -222,18 +211,14 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
+  <!-- <aside class="control-sidebar control-sidebar-dark">
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
     </ul>
-    <!-- Tab panes -->
     <div class="tab-content">
-      <!-- Home tab content -->
       <div class="tab-pane" id="control-sidebar-home-tab">
       </div>
-      <!-- /.tab-pane -->
     </div>
-  </aside>
+  </aside> -->
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
@@ -242,6 +227,7 @@
 <!-- ./wrapper -->
 <!-- jQuery 2.2.3 -->
 <script src="{{URL::to('AdminLTE/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -249,17 +235,8 @@
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <script src="{{URL::to('AdminLTE/bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="{{URL::to('AdminLTE/dist/js/app.min.js')}}"></script>
+<script src="{{URL::to('AdminLTE/dist/js/app.js')}}"></script>
 <script src="{{URL::to('AdminLTE/dist/js/demo.js')}}"></script>
-<script>
-                                  var loadFile = function(event) {
-                                    var reader = new FileReader();
-                                    reader.onload = function(){
-                                      var output = document.getElementById('output');
-                                      output.src = reader.result;
-                                    };
-                                    reader.readAsDataURL(event.target.files[0]);
-                                  };
-                                </script>
+@yield('script')
 </body>
 </html>

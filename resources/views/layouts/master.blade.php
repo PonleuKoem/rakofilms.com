@@ -37,6 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- banner-bottom-plugin -->
 <link href="{{asset('Frontend/css/owl.carousel.css')}}" rel="stylesheet" type="text/css" media="all">
 <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>
+@section('stylesheets')
 </head>
 	
 <body>
@@ -48,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="w3_search">
 				<form action="{{URL::to('/search_result')}}" method="">
-					<input type="text" name="search_result" placeholder="Search" required="">
+					<input type="text" name="search_result" placeholder="Search" required="" value="{{old('search_result')}}">
 					<input type="submit" value="Go">
 				</form>
 			</div>
@@ -63,7 +64,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 <!-- //header -->
 <!-- bootstrap-pop-up -->
-	<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+	<!-- <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -115,9 +116,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			opacity: "toggle"
 		  }, "slow");
 		});
-	</script>
+	</script> -->
 <!-- //bootstrap-pop-up -->
 <!-- nav -->
+	{!!Session::get('message')!!}
 	<div class="movies_nav">
 		<div class="container">
 			<nav class="navbar navbar-default">
@@ -196,7 +198,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</li>
 								</ul>
 							</li>
-							<li><a href="{{URL::to('/news')}}">news</a></li>
+							<li><a href="#">news</a></li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Country <b class="caret"></b></a>
 								<ul class="dropdown-menu multi-column columns-3">
@@ -249,7 +251,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="w3ls_footer_grid_left1">
 						<h2>Subscribe to us</h2>
 						<div class="w3ls_footer_grid_left1_pos">
-							<form action="#" method="post">
+							<form action="{{URL::to('/subscribers/send.html')}}" method="post">
+								{{csrf_field() }}
 								<input type="email" name="email" placeholder="Your email..." required="">
 								<input type="submit" value="Send">
 							</form>
@@ -257,7 +260,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 				</div>
 				<div class="col-md-6 w3ls_footer_grid_right">
-					<a href="index.html"><h2>One<span>Movies</span></h2></a>
+					<a href="{{URL::to('/')}}"><h2>One<span>Movies</span></h2></a>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -267,25 +270,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="col-md-7 w3ls_footer_grid1_right">
 				<ul>
 					<li>
-						<a href="genres.html">Movies</a>
+						<a href="{{URL::to('/moviesfilm/moviesfilm.html')}}">Movies</a>
 					</li>
 					<li>
-						<a href="faq.html">FAQ</a>
+						<a href="{{URL::to('/animations/animations.html')}}">Animation</a>
 					</li>
 					<li>
-						<a href="horror.html">Action</a>
-					</li>
+						<a href="{{URL::to('/faqs.html')}}">FAQ</a>
+					</li>					
 					<li>
-						<a href="genres.html">Adventure</a>
-					</li>
-					<li>
-						<a href="comedy.html">Comedy</a>
-					</li>
-					<li>
-						<a href="icons.html">Icons</a>
-					</li>
-					<li>
-						<a href="contact.html">Contact Us</a>
+						<a href="{{URL::to('/contact-us.html')}}">Contact Us</a>
 					</li>
 				</ul>
 			</div>
@@ -294,8 +288,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 <!-- //footer -->
 </body>
-</html>
-<!-- Bootstrap Core JavaScript -->
+	<!-- Bootstrap Core JavaScript -->
 <script src="{{URL::to('Frontend/js/bootstrap.min.js')}}"></script>
 <script>
 $(document).ready(function(){
@@ -361,3 +354,5 @@ $(document).ready(function(){
 			function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- //for-mobile-apps -->
 <script src="{{asset('Frontend/js/owl.carousel.js')}}"></script>
+@section('script')
+</html>

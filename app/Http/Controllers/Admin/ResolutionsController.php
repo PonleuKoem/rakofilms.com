@@ -13,7 +13,7 @@ use Image;
 use View;
 use Session;
 use Input;
-use App\Resolutions;
+use App\Resolution;
 use Carbon\Carbon;
 
 class ResolutionsController extends Controller
@@ -26,11 +26,11 @@ class ResolutionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct(){
-        $resolution = Resolutions::all();
+        $resolution = Resolution::all();
     }
     public function index()
     {
-        $resolution = Resolutions::all();
+        $resolution = Resolution::all();
         return View::make('admin.pages.resolution')
             ->with('resolution', $resolution);
     }
@@ -53,7 +53,7 @@ class ResolutionsController extends Controller
      */
     public function store(ResolutionsRequest $request)
     {
-        $reso = new Resolutions;
+        $reso = new Resolution;
         $reso -> resolution = $request->resolution;
         $reso -> created_at = Carbon::now();
         $reso -> updated_at = Carbon::now();
@@ -93,7 +93,7 @@ class ResolutionsController extends Controller
     public function update(Request $request, $id)
     {
 
-            $reso = Resolutions::find($id);
+            $reso = Resolution::find($id);
             $reso->resolution       = Input::get('resolution');
             $reso->updated_at = Carbon::now();
             $reso->save();
@@ -113,7 +113,7 @@ class ResolutionsController extends Controller
     public function destroy($id)
     {
          // delete
-        $slides = Resolutions::find($id);
+        $slides = Resolution::find($id);
         $slides->delete();
 
         // redirect

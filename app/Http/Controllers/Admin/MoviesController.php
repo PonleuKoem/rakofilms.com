@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Redirect;
-use illuminate\Support\facades\File;
-use illuminate\Support\facades\Storage;
+use Illuminate\Support\facades\File;
+use Illuminate\Support\facades\Storage;
 use DB;
 use Image;
 use View;
@@ -17,6 +17,8 @@ use Session;
 use Input;
 use App\Movie;
 use Carbon\Carbon;
+use App\Genre;
+use App\MovieGenre;
 
 
 class MoviesController extends Controller
@@ -30,10 +32,12 @@ class MoviesController extends Controller
      */
     public function __construct(){
         $movie = Movie::all();
+        $moviegenre = MovieGenre::all();
+
     }
     public function index()
     {
-        $movie = Movie::all();
+        $movie = Movie::OrderBy('id', 'DESE')->paginate(10);
         return View::make('admin.pages.movie')
             ->with('movie', $movie);
     }
@@ -57,27 +61,39 @@ class MoviesController extends Controller
     public function store(MoviesRequest $request)
     {
         
-        
+        /*dd($request);*/
+        /*$moviegenre = array_values(input::get('genre_id'));*/
         $movie = new Movie;
-        $movie -> movie_title = $request-> movie_title;
-        $movie -> movie_description = $request-> movie_description;
-        $movie -> url = $request -> url;
-        
-        $movie -> country = $request -> country;
-        $movie -> language = $request -> language;
-        $movie -> year = $request -> year;
-        $movie -> resolution_id= $request -> resolution_id;
-        $movie -> status_id = $request -> status_id;
-        $movie -> created_at = Carbon::now();
-        $movie -> updated_at = Carbon::now();
-        $movie->save();
 
-        $file = $request -> file('imagePath');
-        $filename = $request->  movie_title. '-' . $movie->id . '.jpg';
-        if($file){
-            Storage::disk('local')->put($filename, File::get($file));
+        $movie_title = $request->input('movie_title');
+        $movie_description = $request->input('movie_description');
+        $url = $request->input('url');
+        $imagePath = $request->input('imagePath');
+        $country = $request->input('country');
+        $language = $request->input('language');
+        $year = $request->input('year');
+        $resolution_id = $request->input('resolution_id');
+        $category_id = $request->input('category_id');
+        $status_id = $request->input('status_id');
+        $created_at = Carbon::now();
+        $updated_at = Carbon::now();
+        if($request->hasFile('imagePath')){
+            $imagePath = $request->file('imagePath');
+            $filename = time() . '.' . $imagePath ->getClientOriginalExtension();
+            $location = public_path('uploads/movies/' .$filename);
+            Image::make($imagePath)->resize(250, 372)->save($location);
+
+            $movie -> imagePath = $filename;
         }
-        return redirect('/cms/movies')->with('message', 'Data inserted');
+
+        $data= array('movie_title' => $movie_title, 'movie_description'=> $movie_description, 'url' => $url, 'country' => $country,'imagePath' => $filename, 'language' => $language, 'year' => $year, 'resolution_id' => $resolution_id, 'status_id' => $status_id,'created_at' => $created_at, 'category_id'=>$category_id, 'updated_at' => $updated_at);
+        $movie->insert($data);
+        /*$movie->MovieGenre()->attach($moviegenre);*/
+        
+        return redirect('/cms/movies')->with('message', '<div class="alert alert-success">
+                                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                              <strong class="text-center">Insert Successfully</strong>.
+                                            </div>');
     }
 
     /**
@@ -111,14 +127,27 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-            $status = Status::find($id);
-            $status->status       = Input::get('status');
-            $status->updated_at = Carbon::now();
-            $status->save();
+        /*dd($request);*/
+            $movie = Movie::findorfail($id);
+            /*$moviesgenre = array_values(input::get('genre_id'));*/
+            $movie->movie_title       = Input::get('movie_title');
+            $movie->movie_description       = Input::get('movie_description');
+            $movie->url       = Input::get('url');
+            $movie->country       = Input::get('country');
+            $movie->language       = Input::get('language');
+            $movie->category_id       = Input::get('category_id');
+            $movie->year       = Input::get('year');
+            $movie->resolution_id       = Input::get('resolution_id');
+            $movie->status_id       = Input::get('status_id');
+            $movie->updated_at = Carbon::now();
+            $movie->update();
+            /*$movie->pivot-> sync($moviesgenre);*/
 
             // redirect
-            Session::flash('message', 'Successfully updated!');
+            Session::flash('message', '<div class="alert alert-success">
+                                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                              <strong class="text-center">Updated Successfully</strong>.
+                                            </div>');
             return Redirect::back();
         
     }
@@ -132,16 +161,15 @@ class MoviesController extends Controller
     public function destroy($id)
     {
          // delete
-        $status = Status::find($id);
+        $status = Movie::find($id);
         $status->delete();
 
         // redirect
-        Session::flash('message', 'Successfully deleted!');
+        Session::flash('message', '<div class="alert alert-warning">
+                                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                              <strong class="text-center">Deleted Successfully</strong>.
+                                            </div>');
         return Redirect::back();
-    }
-    public function getImage($filename){
-    $file = Storage::disk('local')->get($filename);
-    return new Response($file, 200);
-}
+    }    
     
 }

@@ -44,7 +44,28 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        /*This will not redirect to 404 page*/
         return parent::render($request, $exception);
+        
+        //this will redirect to page 404
+        /*if($this->isHttpException($exception))
+        {
+            switch ($exception->getStatusCode()) {
+                case 404:
+                    return redirect()->route('notfound');
+                    break;
+                case 505:
+                    return redirect()->route('notfound');
+                    break;
+                default:
+                    return $this->rederHttpException($e);
+                    break;
+            }
+        }
+        else{
+            /*return parent::render($request, $exception);
+            return redirect()->route('notfound');
+        }*/
     }
 
     /**

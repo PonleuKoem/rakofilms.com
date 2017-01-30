@@ -14,6 +14,7 @@ use View;
 use Session;
 use Input;
 use App\Slides;
+use Carbon\Carbon;
 
 class SlidesController extends Controller
 {
@@ -24,9 +25,9 @@ class SlidesController extends Controller
      */
     public function index()
     {
-        $slides = Slides::all();
+        $slide = Slides::OrderBy('id', 'DESC')->paginate(10);
         return View::make('admin.pages.slides')
-            ->with('slides', $slides);
+            ->with('slide', $slide);
     }
 
     /**
@@ -67,17 +68,17 @@ class SlidesController extends Controller
         if($request->hasFile('src')){
             $src = $request->file('src');
             $filename = time() . '.' . $src ->getClientOriginalExtension();
-            $location = public_path('images/' .$filename);
+            $location = public_path('uploads/slides/' .$filename);
             Image::make($src)->resize(1300, 500)->save($location);
 
             $dataI -> src = $filename;
         }
-        $active = $request->input('active');
-        $create_date = $request->input('created_date');
-        $update_at = $request->input('updated_at');
+        $active = $request->input('1');
+        $created_at = Carbon::now();
+        $updated_at = Carbon::now();
 
         $data= array('title' => $title, 'description'=> $description, 'src' => 
-            $filename, 'active' => $active, 'created_date' => $create_date, 'updated_at' => $update_at);
+            $filename, 'active' => 1, 'created_at' => $created_at, 'updated_at' => $updated_at);
 
         $dataI->insert($data); 
       /*  $movie = new Home;
@@ -91,7 +92,10 @@ class SlidesController extends Controller
         $movie -> update_at = $request->update_at;
         $movie->save();*/
 
-        return redirect('/slides')->with('message', 'Slides Created successfully');
+        return redirect('/cms/slides')->with('message', '<div class="alert alert-success">
+                                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                              <strong class="text-center">Insert Successfully</strong>.
+                                            </div>');
     }
 
     /**
@@ -125,32 +129,21 @@ class SlidesController extends Controller
      */
     public function update(Request $request, $id)
     {
-           // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'title'       => 'required',
-            'description'      => 'required',
-            'src' => 'required',
-        );
-        $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
-        if ($validator->fails()) {
-            return Redirect::to('slides/' . $id . '/edit')
-                ->withErrors($validator)
-                ->withInput(Input::except('password'));
-        } else {
-            // store
-            $pro = Slides::find($id);
-            $pro->title       = Input::get('title');
-            $pro->description      = Input::get('description');
-            $pro->src = Input::get('src');
-            $pro->save();
+         /*dd($request);*/
+            $slide = Slides::findorfail($id);
+            /*$moviesgenre = array_values(input::get('genre_id'));*/
+            $slide->title       = Input::get('title');
+            $slide->description       = Input::get('description');
+            $slide->updated_at = Carbon::now();
+            $slide->update();
+            /*$movie->pivot-> sync($moviesgenre);*/
 
             // redirect
-            Session::flash('message', 'Successfully updated!');
+            Session::flash('message', '<div class="alert alert-success">
+                                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                              <strong class="text-center">Updated Successfully</strong>.
+                                            </div>');
             return Redirect::back();
-        }
     }
 
     /**
@@ -166,7 +159,10 @@ class SlidesController extends Controller
         $slides->delete();
 
         // redirect
-        Session::flash('message', 'Successfully deleted!');
+        Session::flash('message', '<div class="alert alert-warning">
+                                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                              <strong class="text-center">Deleted Successfully</strong>.
+                                            </div>');
         return Redirect::back();
     }
 }
