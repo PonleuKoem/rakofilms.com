@@ -13,6 +13,7 @@ use View;
 use Session;
 use Input;
 use App\News;
+use Carbon\Carbon;
 
 class NewsController extends Controller
 {
@@ -73,11 +74,11 @@ class NewsController extends Controller
                 $dataI -> img = $filename;
             }
             $active = $request->input('active');
-            $create_date = $request->input('created_date');
-            $update_at = $request->input('updated_at');
+            $created_at = $request->input('created_at');
+            $updated_at = $request->input('updated_at');
 
             $data= array('title' => $title, 'contents'=> $contents, 'descriptions'=> $descriptions, 'img' => 
-                $filename, 'active' => $active, 'created_date' => $create_date, 'updated_at' => $update_at);
+                $filename, 'active' => $active, 'created_at' => $created_at, 'updated_at' => $updated_at);
 
             $dataI->insert($data); 
           /*  $movie = new Home;
@@ -147,6 +148,7 @@ class NewsController extends Controller
             $news->contents       = Input::get('title');
             $news->descriptions      = Input::get('descriptions');
             $news->img = Input::get('img');
+            $news->updated_at = Carbon::now();
             $news->save();
 
             // redirect

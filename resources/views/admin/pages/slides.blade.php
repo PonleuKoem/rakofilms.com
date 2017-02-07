@@ -15,12 +15,13 @@
 @section('content')
 <div class="box-header panel" style="margin-top: 15px">
   <hr>
-  <h1><small>Movie</small></h1>
+  <h3><small>Slides</small></h3>
 </div>
-<h4 style="color: green">{{Session::get('message')}}</h4>
+{{Session::get('message')}}
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
                       
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
 <div class="margin"></div>
 <div class="col-md-12">
   <div class="box box-info table-responsive no-padding">
@@ -203,11 +204,13 @@
                                           </div>
                                       <span style="color: red">{{ ($errors -> has('src')) ? $errors -> first('src') : ''}}</span>
                                   </div>
-                                  <div class="col-md-6">
-                                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                      <input type="submit" name="submit" class="btn btn-warning" value="Create"/>
-                                  </div>
+                                  <div class="col-md-12">
+                                    <div class="panel pull-right">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button type="button" class="btn bg-olive btn-flat" data-dismiss="modal">Close</button>
+                                        <input type="submit" name="submit" class="btn bg-olive btn-flat" value="Update"/>
+                                    </div>
+                                </div>
                             </div>
                               
                                 

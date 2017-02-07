@@ -71,14 +71,16 @@ Route::group(['middleware' => ['admin']], function() {
 	Route::get('/create/search', 'Test\MovieslistController@search_result');
 	Route::resource('/cms/news', 'Admin\NewsController'); 
 	Route::resource('/cms/trailers', 'Admin\TrailersController');
-}); /*This hided because template is not attractive*/
+
+	Route::resource('/genres', 'Admin\GenresController');
+	Route::resource('/cms/resolutions', 'Admin\ResolutionsController');
+	Route::resource('/cms/statuses', 'Admin\StatusesController');
+	Route::resource('/cms/movies', 'Admin\MoviesController');
+	Route::resource('/cms/profile', 'Admin\ProfilesController');
+});
 Route::get('/signintest', function () {
     return view('test.login');
 });
-Route::resource('/genres', 'Admin\GenresController');
-Route::resource('/cms/resolutions', 'Admin\ResolutionsController');
-Route::resource('/cms/statuses', 'Admin\StatusesController');
-Route::resource('/cms/movies', 'Admin\MoviesController');
 
 //404 page
 Route::get('/pagenotfound', ['as'=>'notfound', 'uses'=>'RedirectController@index']);

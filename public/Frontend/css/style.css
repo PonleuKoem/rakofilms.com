@@ -1513,3 +1513,15 @@ h3.head {
 		font-size: 1.8em;
 	}
 }
+
+h4.mx-wd-sim{
+  max-width: 212px;
+}
+.movie-title{
+            color: #ff8d1b;
+            font-family: serif;
+        }
+        .year{
+            color: #000000;
+            font-family: serif;
+        }

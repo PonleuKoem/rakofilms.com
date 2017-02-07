@@ -156,7 +156,10 @@ class SlidesController extends Controller
     {
          // delete
         $slides = Slides::find($id);
-        $slides->delete();
+
+        $slides->active       = 1;
+        $slides->updated_at = Carbon::now();
+        $slides->update();
 
         // redirect
         Session::flash('message', '<div class="alert alert-warning">

@@ -11,18 +11,27 @@
      vertical-align: middle;
 }
 </style>
- 
-@endsection
-@section('content')
-<div class="box-header panel" style="margin-top: 15px">
-  <hr>
-  <h1><small>Movie</small></h1>
-</div>
-{!!Session::get('message')!!}
+
+<!-- Content Header (Page header) -->
+
+    <h1></h1><br>
+    @endsection
+    @section('content')
+    {!!Session::get('message')!!}
+    <section class="content-header">
+      <h1>
+        Movies
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">User profile</li>
+      </ol>
+    </section>
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
                       
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-<div class="margin"></div>
+
 <div class="col-md-12">
   <div class="box box-info table-responsive no-padding">
     <div class="box-header with-border">
@@ -31,16 +40,16 @@
           <div class="input-group">
             <input type="text" name="search_result" class="form-control" placeholder="Search...">
                 <span class="input-group-btn">
-                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                  <!-- <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i> -->
+                  <button type="submit" class="btn btn-success btn-flat">Send</button>
                   </button>
                 </span>
           </div>
         </form>
       </div>
       <div class="col-md-6">
-        <h1></h1>
-          <span> <p><button class="btn bg-olive btn-flat margin pull-right" style="" type="button" data-toggle="modal" data-toggle="modal" data-target="#myModal90"">Add New
-                </button></p> </span>
+        <p><button class="btn bg-olive btn-flat margin pull-right" style="" type="button" data-toggle="modal" data-toggle="modal" data-target="#myModal90"">Add New
+                </button></p>
       </div>
         
     </div>
@@ -66,7 +75,7 @@
         <tbody>
           <tr>
 
-            <td class="">{{$row->id}}</td>
+            <td class="">{{$key}}</td>
             <td class="">{{ str_limit($row->movie_title, 20)}}</td>
             <td class=""><img src="{{asset('uploads/movies/'.$row->imagePath)}}" alt="" style="width: 70px"></td>
             <!-- <td class="">{{ str_limit($row->country, 20)}}</td>
@@ -81,8 +90,8 @@
             @else 
                <td class=""><span class="label label-warning">{{ str_limit($row->status->status, 20)}}</span></td>
             @endif
-            <td class="">{{date('d-m-Y', strtotime($row->created_at))}}</td>
-            <td class="">{{date('d-m-Y', strtotime($row->updated_at))}}</td>
+            <td class="">{{date('j M, Y h:ia', strtotime($row->created_at))}}</td>
+            <td class="">{{date('j M, Y h:ia', strtotime($row->updated_at))}}</td>
             <td class="">
       
               <div>
@@ -330,19 +339,20 @@
                                 <div class="col-md-12">
                                   <div class="panel">
                                       <input name="imagePath" type="file" accept="image/*" onchange="loadFile1(event)" class="form-control text-center">
-                                          <div style="width: 182px; height: 268px; padding:1px"><span></span>                               
-
-                                           <!--  <img id="output1" class="imgreplace" style="width: 182px; height: 268px;" src="" alt="Size 182x268px" /> -->
-                                          </div>
+                                          <!-- <div style="width: 182px; height: 268px; padding:1px"><span></span>                               
+                                          
+                                           <img id="output1" class="imgreplace" style="width: 182px; height: 268px;" src="" alt="Size 182x268px" />
+                                          </div> -->
                                       <span style="color: red">{{ ($errors -> has('imagePath')) ? $errors -> first('imagePath') : ''}}</span>
                                   </div>
                                 </div>
                                 <div class="col-md-12">
-                                  <div class="panel pull-right">
-                                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                      <input type="submit" name="submit" class="btn btn-warning" value="Create"/>
-                                  </div>
+                                    <div class="panel pull-right">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button type="button" class="btn bg-olive btn-flat" data-dismiss="modal">Close</button>
+                                        <input type="submit" name="submit" class="btn bg-olive btn-flat" value="Update"/>
+                                    </div>
+                                </div>
                             </div>
                               
                                 

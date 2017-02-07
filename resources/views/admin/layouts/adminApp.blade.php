@@ -17,7 +17,7 @@
       font-family: 'Source Sans Pro','Helvetica Neue', Helvetica, Arial, sans-serif;
     }
     .navbar{
-      background-color: #031d12;
+      background-color: #033e25;
     }
     .main-sidebar{
       background-color: #000000;
@@ -108,7 +108,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{URL::to('#')}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <form action="/logout" method="POST" id="logout-form">

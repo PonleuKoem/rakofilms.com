@@ -7,6 +7,7 @@
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
                       
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<hr>  
 <div class="box-body box box-caption">
   <h4 style="color: green">{{Session::get('message')}}</h4>
   <div class="box-body table-responsive no-padding ">
@@ -20,7 +21,7 @@
             <th >#</th>
             <th>Title</th>
             <th>img</th>
-            <th>Created_date</th>
+            <th>Created_at</th>
             <th>Actions</th>      
           </tr>
         </thead>
@@ -31,7 +32,7 @@
             <td class="">{{$key+1}}</td>
             <td class="">{{ str_limit($row->title, 20)}}</td>
             <td class="" style="vertical-align: middle;"><img style="max-width: 80px" src="{{asset('images/'.$row->img)}}" alt="Not available" /></a></a></td> 
-            <td class="">{{$row->created_date}}</td>
+            <td class="">{{$row->created_at}}</td>
             <td class="">
       
               <div class="dropdown">

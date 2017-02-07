@@ -1,14 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Movies Today')
 <style type="text/css">
-        .movie-title{
-            color: #ff8d1b;
-            font-family: serif;
-        }
-        .year{
-            color: #000000;
-            font-family: serif;
-        }
     </style>
 @section('content')
 		<div class="w3l-agile-horror">
@@ -39,21 +31,25 @@
 		                                </a>
 		                                <div class="mid-1 agileits_w3layouts_mid_1_home">
 		                                    <div class="w3l-movie-text">
-		                                        <a href="{{URL::to('/post/'.$row->id.'/movie.html')}}"><h4 class="movie-title">{{str_limit($row->movie_title, 25)}}</h4></a>                         
+		                                        <a href="{{URL::to('/post/'.$row->id.'/movie.html')}}"><h4 class="movie-title">{{str_limit($row->movie_title, 20)}}</h4></a>                         
 		                                    </div>
 		                                    <div class="mid-2 agile_mid_2_home">
 		                                        <p><small  class="year">{{$row->year}}</small></p>
 		                                        <div class="block-stars">
 		                                            <ul class="w3l-ratings">
-		                                                <p><small  class="created-at">{{date('d-m-Y', strtotime($row->created_at))}}</small></p>
+		                                                <p><small  class="created-at">{{date('j M, Y h:ia', strtotime($row->created_at))}}</small></p>
 		                                            </ul>
 		                                        </div>
 		                                        <div class="clearfix"></div>
 		                                    </div>
 		                                </div>
-		                                <div class="ribben">
-		                                    <p><small>{{$row->resolution->resolution}}</small></p>
-		                                </div>
+		                                @if(($row->resolution_id)==1)
+		                                <div class="ribben" style=""><p><small>{{$row->resolution->resolution}}</small></p></div>
+		                                @elseif(($row->resolution_id)==2)
+		                                <div class="ribben1"><p><small style="color: #1100f7;">{{$row->resolution->resolution}}</small></p></div>
+		                                @else
+		                                <div class="ribben2"><p><small style="color: #000000;">{{$row->resolution->resolution}}</small></p></div>
+		                                @endif
 		                            </div>
 									@endforeach
 									@else

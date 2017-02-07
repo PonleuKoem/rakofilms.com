@@ -162,7 +162,9 @@ class MoviesController extends Controller
     {
          // delete
         $status = Movie::find($id);
-        $status->delete();
+        $status->status_id       = 3;
+        $status->updated_at = Carbon::now();
+        $status->update();
 
         // redirect
         Session::flash('message', '<div class="alert alert-warning">

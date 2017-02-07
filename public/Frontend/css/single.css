@@ -39,7 +39,7 @@ font-family: 'Roboto Condensed', sans-serif;
 }
 .song-info h3{
   color: #272C2E;
-  font-size: 22px;
+  font-size: 17px;
   margin: 0;
   line-height: 1.5em;
 }
@@ -92,7 +92,7 @@ font-family: 'Roboto Condensed', sans-serif;
     padding: 3em 0 0 3em;
 }
 .single-right{
-	background: rgba(255, 141, 27, 0.09);
+	background: #ffffff;
        padding: 2em 0 0 2em;
 }
 .show-right-grids {
@@ -489,7 +489,7 @@ width:100%;
 		    width: 100%;
 	}
 	.single-right {
-		background: rgba(255, 141, 27, 0.09);
+		background: #ffffff;
 		padding:2em 1em 0 2em;
 		float: none;
 		width: 45%;
@@ -569,9 +569,9 @@ width:100%;
 		padding-left: 2em;
 	}
 	.song-info h3 {
-		font-size: 20px;
-		margin: 0;
-		line-height: 0em;
+		font-size: 15px;
+    margin: 10px;
+    line-height: 1.5em;
 	}
 	.single-right {
 		padding: 1.5em 0 0 1em;

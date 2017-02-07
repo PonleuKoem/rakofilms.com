@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Uploader</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="drop_uploader.css">
+
+    <script src="jquery-2.2.4.min.js"></script>
+    <script src="drop.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('input[type=file]').drop_uploader({
+                uploader_text: 'Drop files to upload, or',
+                browse_text: 'Browse',
+                browse_css_class: 'button button-primary',
+                browse_css_selector: 'file_browse',
+                uploader_icon: '<i class="pe-7s-cloud-upload"></i>',
+                file_icon: '<i class="pe-7s-file"></i>',
+                time_show_errors: 5,
+                layout: 'thumbnails',
+                method: 'normal',
+                url: 'ajax_upload.php',
+                delete_url: 'ajax_delete.php',
+            });
+        });
+    </script>
+
+</head>
+<body style="background: #fff;">
+    <div class="container">
+        <div class="row">
+            <div class="twelve column" style="margin-top: 5%">
+                <h4>Multiple File Upload Form</h4>
+                <form method="POST" action="upload.php" enctype="multipart/form-data">
+                    <input type="file" name="file[]" multiple>
+                    <input class="button-primary" type="submit" value="Submit">
+                </form>
+                <h4>AJAX Upload Form</h4>
+                <form method="POST" action="upload.php" enctype="multipart/form-data">
+                    <input type="file" name="file[]" data-method="ajax" multiple>
+                    <input class="button-primary" type="submit" value="Submit">
+                </form>
+                <h4>Single File Upload Form</h4>
+                <form method="POST" action="upload.php" enctype="multipart/form-data">
+                    <input type="file" name="file">
+                    <input class="button-primary" type="submit" value="Submit">
+                </form>
+                <h4>Only Images Upload Form</h4>
+                <form method="POST" action="upload.php" enctype="multipart/form-data">
+                    <input type="file" multiple name="file[]" accept="image/*">
+                    <input class="button-primary" type="submit" value="Submit">
+                </form>
+                <h4>Only PDF Upload Form</h4>
+                <form method="POST" action="upload.php" enctype="multipart/form-data">
+                    <input type="file" multiple name="file[]" accept="application/pdf">
+                    <input class="button-primary" type="submit" value="Submit">
+                </form>
+                <h4>Only Files Less than 5 Mb</h4>
+                <form method="POST" action="upload.php" enctype="multipart/form-data">
+                    <input type="file" multiple name="file[]" data-maxfilesize="5000000">
+                    <input class="button-primary" type="submit" value="Submit">
+                </form>
+                <h4>File List Layout</h4>
+                <form method="POST" action="upload.php" enctype="multipart/form-data">
+                    <input type="file" name="file[]" multiple data-layout="list">
+                    <input class="button-primary" type="submit" value="Submit">
+                </form>
+                <h4>AJAX Single File Upload with List Layout</h4>
+                <form method="POST" action="upload.php" enctype="multipart/form-data">
+                    <input type="file" name="file" data-layout="list" data-method="ajax">
+                    <input class="button-primary" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

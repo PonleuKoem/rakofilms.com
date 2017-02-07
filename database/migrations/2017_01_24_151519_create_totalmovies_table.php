@@ -37,10 +37,14 @@ class CreateTotalmoviesTable extends Migration
             $table->string('movie_title','255');
             $table->string('movie_description','255');
             $table->string('url','1000');
+            $table->string('v2', '100');
+            $table->string('v3', '100');
             $table->string('imagePath','255');
             $table->string('country', '255');
             $table->string('language', '255');
             $table->string('year', '4');
+            $table->string('user_note', '500');
+            $table->string('admin_note', '500');
             $table->integer('category_id')->unsigned();
             $table->integer('resolution_id')->unsigned();
             $table->integer('status_id')->unsigned();
@@ -74,7 +78,24 @@ class CreateTotalmoviesTable extends Migration
             $table->string('title', '255');
             $table->string('description', '255');
             $table->string('src', '1000');
-            $table->boolean('active');
+            $table->boolean('active', true);
+            $table->timestamps();
+            $table->engine = 'InnoDB';
+        });
+        Schema::create('tbl_news', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title', '255');
+            $table->string('descriptions', '255');
+            $table->string('contents', '12000');
+            $table->string('img', '1000');
+            $table->boolean('active', true);
+            $table->timestamps();
+            $table->engine = 'InnoDB';
+        });
+        Schema::create('tbl_subscribers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('email', '255');
+            $table->string('ip', '255')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });
@@ -94,5 +115,6 @@ class CreateTotalmoviesTable extends Migration
         Schema::drop('tbl_genres');
         Schema::drop('tbl_slides');
         Schema::drop('tbl_categories');
+        Schema::drop('tbl_news');
     }
 }

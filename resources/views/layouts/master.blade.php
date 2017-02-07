@@ -15,28 +15,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <link href="{{asset('Frontend/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{asset('Frontend/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" href="{{asset('Frontend/css/contactstyle.css')}}" type="text/css" media="all" />
-<link rel="stylesheet" href="{{asset('Frontend/css/faqstyle.css')}}" type="text/css" media="all" />
-<link href="{{asset('Frontend/css/single.css')}}" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="{{asset('Frontend/css/contactstyle.css')}}" type="text/css" media="all" /><!--only contact page needed-->
+<link rel="stylesheet" href="{{asset('Frontend/css/faqstyle.css')}}" type="text/css" media="all" /><!--only faqpage need for slides-->
+<link href="{{asset('Frontend/css/single.css')}}" rel='stylesheet' type='text/css' /><!--only single page needded-->
 <link href="{{asset('Frontend/css/medile.css')}}" rel='stylesheet' type='text/css' />
 <!-- banner-slider -->
-<link href="{{asset('Frontend/css/jquery.slidey.min.css')}}" rel="stylesheet">
+<link href="{{asset('Frontend/css/jquery.slidey.min.css')}}" rel="stylesheet"><!--only homepage need for slides-->
 <!-- //banner-slider -->
 <!-- pop-up -->
-<link href="{{asset('Frontend/css/popuo-box.css')}}" rel="stylesheet" type="text/css" media="all" />
+<!-- <link href="{{asset('Frontend/css/popuo-box.css')}}" rel="stylesheet" type="text/css" media="all" /> -->
 <!-- //pop-up -->
 <!-- font-awesome icons -->
 <link rel="stylesheet" href="{{asset('Frontend/css/font-awesome.min.css')}}" />
 <!-- //font-awesome icons -->
 <!-- list-css -->
-<link rel="stylesheet" href="{{asset('Frontend/list-css/list.css')}}" type="text/css" media="all" />
+<!-- <link rel="stylesheet" href="{{asset('Frontend/list-css/list.css')}}" type="text/css" media="all" /> -->
 <!-- //list-css -->
 <!-- js -->
 <script type="text/javascript" src="{{asset('Frontend/js/jquery-2.1.4.min.js')}}"></script>
 <!-- //js -->
 <!-- banner-bottom-plugin -->
 <link href="{{asset('Frontend/css/owl.carousel.css')}}" rel="stylesheet" type="text/css" media="all">
+<link href="{{asset('Frontend/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" media="all">
 <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>
+<style type="text/css">
+        .movie-title{
+            color: #000000;
+            font-family: serif;
+        }
+        .year{
+            color: #f98a00;
+            font-family: serif;
+        }
+        .morecontent span {
+		    display: none;
+		}
+		.morelink {
+		    display: block;
+		}
+		.created-at{
+			color: #840000;
+		}
+    </style>
 @section('stylesheets')
 </head>
 	
@@ -339,7 +359,7 @@ $(document).ready(function(){
 	<!-- //banner-bottom-plugin -->
 	<!-- start-smoth-scrolling -->
 	<script type="text/javascript" src="{{asset('Frontend/js/move-top.js')}}"></script>
-	<script type="text/javascript" src="{{asset('Frontend/js/easing.js')}}"></script>
+	<script type="text/javascript" src="{{asset('Frontend/js/jquery-ui.min.js')}}"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$(".scroll").click(function(event){		
@@ -347,6 +367,9 @@ $(document).ready(function(){
 				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 			});
 		});
+	</script>
+	<script type="text/javascript">
+		
 	</script>
 	<!-- start-smoth-scrolling -->
 	
